@@ -7,6 +7,10 @@ public class Tetramino : MonoBehaviour {
     float fall = 0;
     public float fallSpeed = 1;
 
+    public bool allowRotation = true;
+    public bool limitRotation = false;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -57,14 +61,48 @@ public class Tetramino : MonoBehaviour {
             fall = Time.time;
         } else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.Rotate (0, 0, 90);
-            if (CheckIsValidPosition())
+            if (allowRotation)
             {
+                if (limitRotation)
+                {
+                    if (transform.rotation.eulerAngles.z >= 90)
+                    {
+                        transform.Rotate(0, 0, -90);
+                    }
+                    else
+                    {
+                        transform.Rotate(0, 0, 90);
+                    }
+                }
+                else
+                {
+                    transform.Rotate(0, 0, 90);
+                }
+                if (CheckIsValidPosition())
+                  {
 
-            } else
-            {
-                transform.Rotate(0, 0, -90);
+                  }
+                else
+                  {
+                   if (limitRotation)
+                    {
+                        if (transform.rotation.eulerAngles.z >= 90)
+                        {
+                            transform.Rotate(0, 0, -90);
+                        }
+                        else
+                        {
+                            transform.Rotate(0, 0, 90);
+                        }
+                    } else
+                    {
+                        transform.Rotate (0, 0, -90);
+                    }
+
+                  }
+                
             }
+            
         }
     }
 
