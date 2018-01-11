@@ -12,6 +12,7 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Start");
         SpawnNextTetro();
 	}
 	
@@ -21,15 +22,15 @@ public class Game : MonoBehaviour {
 	}
 
     // for each colummn in each row check if null
-    public void UpdateGrid (Tetramino tetromino)
+    public void UpdateGrid (Tetramino tetramino)
     {
-        for (int y = 0; y < gridHeight; y++)
+        for (int y = 0; y < gridHeight; ++y)
         {
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < gridWidth; ++x)
             {
                 if(grid[x,y] != null)
                 {
-                    if(grid[x,y] == tetromino.transform)
+                    if(grid[x,y].parent == tetramino.transform)
                     {
                         grid[x, y] = null;
                     }
@@ -37,7 +38,7 @@ public class Game : MonoBehaviour {
             }
         }
         
-        foreach (Transform mino in tetromino.transform)
+        foreach (Transform mino in tetramino.transform)
         {
             Vector2 pos = Round(mino.position);
             if (pos.y < gridHeight)
@@ -61,6 +62,7 @@ public class Game : MonoBehaviour {
     public void SpawnNextTetro ()
     {
         // load random tetro, positioned & rotated
+        Debug.Log("hello");
         GameObject nextTetro = (GameObject)Instantiate(Resources.Load(GetRandomTetro(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity);
     }
 
