@@ -25,7 +25,7 @@ public class Game : MonoBehaviour {
     {
         for (int y = 0; y < gridHeight; y++)
         {
-            for (int x = 0; x < gridHeight; x++)
+            for (int x = 0; x < gridWidth; x++)
             {
                 if(grid[x,y] != null)
                 {
@@ -44,6 +44,17 @@ public class Game : MonoBehaviour {
             {
                 grid[(int)pos.x, (int)pos.y] = mino;
             }
+        }
+    }
+
+    public Transform GetTransformAtGridPos (Vector2 pos)
+    {
+        if (pos.y > gridHeight -1)
+        {
+            return null;
+        } else
+        {
+            return grid[(int)pos.x, (int)pos.y];
         }
     }
 

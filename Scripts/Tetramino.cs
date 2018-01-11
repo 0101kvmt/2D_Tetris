@@ -123,6 +123,10 @@ public class Tetramino : MonoBehaviour {
             {
                 return false;
             }
+            if (FindObjectOfType<Game>().GetTransformAtGridPos(pos) != null && FindObjectOfType<Game>().GetTransformAtGridPos(pos).parent != transform)
+            {
+                return false;
+            }
         }
 
         return true;
