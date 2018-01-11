@@ -17,6 +17,11 @@ public class Game : MonoBehaviour {
 		
 	}
 
+    public void SpawnNextTetromino ()
+    {
+        GameObject nextTetro = (GameObject)Instantiate()
+    }
+
     public bool CheckIsInsideGrid(Vector2 pos)
     {
         //if x position within 0 & gridWidth & not under y position 0.
@@ -26,5 +31,39 @@ public class Game : MonoBehaviour {
     public Vector2 Round (Vector2 pos)
     {
         return new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
+    }
+
+    string GetRandomTetro ()
+    {
+        int randomTetro = Random.Range(1, 8);
+
+        string randomTetroName = "Tetromino_T";
+
+        switch(randomTetro)
+        {
+            case 1:
+                randomTetroName = "Tetromino_T";
+                break;
+            case 2:
+                randomTetroName = "Tetromino_Long";
+                break;
+            case 3:
+                randomTetroName = "Tetromino_Square";
+                break;
+            case 4:
+                randomTetroName = "Tetromino_J";
+                break;
+            case 5:
+                randomTetroName = "Tetromino_L";
+                break;
+            case 6:
+                randomTetroName = "Tetromino_S";
+                break;
+            case 7:
+                randomTetroName = "Tetromino_Z";
+                break;
+        }
+
+        return randomTetroName;
     }
 }
