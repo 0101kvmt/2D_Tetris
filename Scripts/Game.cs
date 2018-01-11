@@ -21,6 +21,62 @@ public class Game : MonoBehaviour {
 		
 	}
 
+    public bool isFullRow (int y)
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            if(grid[x,y] == null)
+            {
+                return false;
+            }
+        }
+        //if not return false in for loop, grid is confirmed full
+        return true;
+    }
+
+    public void DeleteMino (int y)
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            Destroy(grid[x, y].gameObject);
+            grid[x, y] = null;
+        }
+    }
+
+    public void MoveRowDown (int y) {
+      
+        for (int x = 0; x < gridWidth; x++)
+        {
+            if (grid[x,y] != null)
+            {
+                grid[x, y - 1] = grid[x, y];
+                grid[x, y] = null;
+                grid[x, y - 1].position += new Vector3(0, -1, 0);
+            }
+        }
+    }
+
+    public void MoveAllRowsDown (int y)
+    {
+        for (int i = y; i < gridHeight; i++)
+        {
+            MoveRowDown(i);
+        }
+    }
+    
+    public void DeleteRow ()
+    {
+        for (int y = 0; y < gridHeight; y++)
+        {
+            if(isFullRow(y))
+            {
+                DeleteMino(y);
+                MoveAllRowsDown(y + 1);
+                --y;
+            }
+        }
+    }
+    
     // for each colummn in each row check if null
     public void UpdateGrid (Tetramino tetramino)
     {

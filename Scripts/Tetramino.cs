@@ -58,6 +58,8 @@ public class Tetramino : MonoBehaviour {
             {
                 transform.position += new Vector3(0, 1, 0);
 
+                FindObjectOfType<Game>().DeleteRow();
+
                 enabled = false;
                 Debug.Log("Input down Spawn");
                 FindObjectOfType<Game>().SpawnNextTetro();
@@ -121,12 +123,12 @@ public class Tetramino : MonoBehaviour {
             // if not inside grid, return false
             if(FindObjectOfType<Game>().CheckIsInsideGrid (pos) == false)
             {
-                Debug.Log("Boolean false 1");
+                Debug.Log("Boolean false 1. Not insideGrid.");
                 return false;
             }
             if (FindObjectOfType<Game>().GetTransformAtGridPos(pos) != null && FindObjectOfType<Game>().GetTransformAtGridPos(pos).parent != transform)
             {
-                Debug.Log("Boolean false 2");
+                Debug.Log("Boolean false 2. Not inside grid + not mino");
                 return false;
             }
         }
